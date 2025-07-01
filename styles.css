@@ -1622,12 +1622,12 @@ nav a.active {
     }
 
     .email_btn{
-        font-size: 11px;
-        padding: 5px 15px;
+        font-size: 11px !important;
+        padding: 5px 15px !important;
     }
 
     .email_btn img {
-        width: 7%;
+        width: 7% !important;
     }
     .font_weight_100 {
         font-weight: 100;
@@ -1800,7 +1800,7 @@ nav a.active {
 
     .contact-section {
         text-align: left;
-        height: 190px;
+        height: 140px;
         margin: 0 0 75px 0;
     }
 
