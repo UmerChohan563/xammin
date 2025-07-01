@@ -503,6 +503,10 @@ function openPopup(index) {
     }
 }
 
+function closePopup() {
+    document.getElementById('popupOverlay').style.display = 'none';
+}
+
 // Mobile menu toggle functionality
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
 const mobileNav = document.querySelector('.mobile-nav');
