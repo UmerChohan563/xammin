@@ -1008,6 +1008,7 @@ nav a.active {
     height: 100vh;
     display: grid;
     align-items: center;
+    align-content: center;
 }
 
 .spot-container {
@@ -1015,6 +1016,7 @@ nav a.active {
     height: 350px;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .left-content,
@@ -1029,6 +1031,10 @@ nav a.active {
 .logos-section {
     position: relative;
     /* Needed for absolute positioning of overlay */
+}
+
+.logo_container{
+    height: 30vh;
 }
 
 .logos-overlay {
@@ -1051,6 +1057,7 @@ nav a.active {
     align-items: center;
     font-size: 35px;
     max-width: 1280px;
+    width: 100%;
     margin: auto;
 }
 
@@ -1234,26 +1241,6 @@ nav a.active {
     padding: 5px;
     border-radius: 5px;
     transition: 0.3s;
-}
-
-.filter_invert:hover {
-    filter: invert(1);
-}
-
-.facebook:hover{
-    background-color: #FE9A25;
-}
-
-.twitter:hover{
-    background-color: #fff;
-}
-
-.insta:hover{
-    background: linear-gradient(45deg, #0E73CF, #5DCD56);
-}
-
-.link:hover{
-    background-color: #FF9D3E;
 }
 
 .footer_contact {
@@ -1841,4 +1828,10 @@ nav a.active {
 }
 .footer_links_mobile{
     display: none;
+}
+.spot_container{
+    height: 70vh;
+    display: flex;
+    width: 100%;
+    align-items: center;
 }

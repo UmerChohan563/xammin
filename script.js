@@ -354,56 +354,75 @@ if (video && playBtn && videoControls) {
     const videoButton = document.querySelector('.video');
     if (videoButton && typeof swiper !== 'undefined') {
         videoButton.addEventListener('click', () => {
-            swiper.slideNext();
+            swiper.slideTo(2); 
         });
     }
 
     const programsButton = document.querySelector('.programs');
     if (programsButton && typeof swiper !== 'undefined') {
         programsButton.addEventListener('click', () => {
-            swiper.slideTo(3); // Slides to 3rd slide (index starts at 0)
+            swiper.slideTo(3); 
         });
     }
 
     const enrollmentButton = document.querySelector('.enrollment');
     if (enrollmentButton && typeof swiper !== 'undefined') {
         enrollmentButton.addEventListener('click', () => {
-            swiper.slideTo(5); // Slides to 3rd slide (index starts at 0)
+            swiper.slideTo(5); 
         });
     }
 
     const contactButton = document.querySelector('.contact');
     if (contactButton && typeof swiper !== 'undefined') {
         contactButton.addEventListener('click', () => {
-            swiper.slideTo(7); // Slides to 3rd slide (index starts at 0)
+            swiper.slideTo(7); 
         });
     }
 
     const homeButton = document.querySelector('.footer_home');
     if (homeButton && typeof swiper !== 'undefined') {
         homeButton.addEventListener('click', () => {
-            swiper.slideTo(0); // Goes to the first slide (index 0)
+            swiper.slideTo(0); 
         });
     }
 
     const footerAboutButton = document.querySelector('.footer_about');
     if (footerAboutButton && typeof swiper !== 'undefined') {
         footerAboutButton.addEventListener('click', () => {
-            swiper.slideTo(1); // Goes to the first slide (index 0)
+            swiper.slideTo(2); 
         });
     }
 
     const footerProgramsButton = document.querySelector('.footer_programs');
     if (footerProgramsButton && typeof swiper !== 'undefined') {
         footerProgramsButton.addEventListener('click', () => {
-            swiper.slideTo(3); // Goes to the first slide (index 0)
+            swiper.slideTo(3); 
         });
     }
 
     const footerEnrollmentButton = document.querySelector('.footer_enrollment');
     if (footerEnrollmentButton && typeof swiper !== 'undefined') {
         footerEnrollmentButton.addEventListener('click', () => {
-            swiper.slideTo(5); // Goes to the first slide (index 0)
+            swiper.slideTo(5); 
+        });
+    }
+
+    const getStarted = document.querySelector('.get_started','.get_started_programs');
+    if (getStarted && typeof swiper !== 'undefined') {
+        getStarted.addEventListener('click', () => {
+            swiper.slideTo(5); 
+        });
+    }
+    const getStartedPrograme = document.querySelector('.get_started_programs');
+    if (getStartedPrograme && typeof swiper !== 'undefined') {
+        getStartedPrograme.addEventListener('click', () => {
+            swiper.slideTo(5); 
+        });
+    }
+    const getStartedDisclaimer = document.querySelector('.get_started_disclaimer');
+    if (getStartedDisclaimer && typeof swiper !== 'undefined') {
+        getStartedDisclaimer.addEventListener('click', () => {
+            swiper.slideTo(5); 
         });
     }
 });
