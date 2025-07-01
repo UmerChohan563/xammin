@@ -372,11 +372,11 @@ const exploreBtn = document.querySelector('.explore-btn');
 if (exploreBtn) {
     exploreBtn.addEventListener('click', () => {
         if (isMobileDevice()) {
-            // For mobile devices - scroll to video section
-            document.getElementById('video_section')?.scrollIntoView({ behavior: 'smooth' });
+            // Mobile - scroll to program section
+            document.getElementById('program_sections')?.scrollIntoView({ behavior: 'smooth' });
         } else if (typeof swiper !== 'undefined') {
-            // For desktop - slide to next slide
-            swiper.slideNext();
+            // Desktop - go directly to slide 3 (zero-based index 2)
+            swiper.slideTo(3); // Change to 3 if your swiper uses 1-based index
         }
     });
 }
