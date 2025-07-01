@@ -1210,7 +1210,7 @@ nav a.active {
     }
 
     .social-icons {
-        justify-content: center;
+        justify-content: left;
     }
 
     .contact-section h3::after {
@@ -1222,7 +1222,7 @@ nav a.active {
         gap: 5px;
         text-align: left;
         padding: 12px 25px;
-        font-size: 10px;
+        font-size: 13px;
     }
 }
 
@@ -1598,8 +1598,12 @@ nav a.active {
 
     .programs-title {
         font-size: 20px;
-        margin: 20px 0;
+        margin: 0 0 20px 0;
         font-weight: 100;
+    }
+
+    .logo_container{
+        height: 25vh;
     }
 
     .footer-column h3{
@@ -1671,12 +1675,12 @@ nav a.active {
         height: auto;
         margin: 25px 0 0 0;
         width: 100%;
-        background: #090909;
+        background: #000000;
     }
 
     .main-section {
         display: block;
-        margin: auto;
+        margin: 20px auto;
         width: 90%;
     }
 
@@ -1703,7 +1707,7 @@ nav a.active {
     }
 
     .logo {
-        margin: 20px auto;
+        margin: 20px 0;
     }
 
     .footer-bottom-content{
@@ -1792,7 +1796,10 @@ nav a.active {
         background-image: none;
     }
     .disclaimer-section{
-        margin: 10px 0 60px 0;
+        margin: 40px 0 70px 0;
+    }
+    .d_block_mobile{
+        display: block !important;
     }
 }
 .explore-btn:hover, .philosophy-button:hover{
