@@ -1804,6 +1804,10 @@ nav a.active {
         margin: 0 0 75px 0;
     }
 
+    .disclaimer_watermark{
+        background-size: 100% 50%;
+    }
+
     .font_size_13px_mobile{
         font-size: 13px;
     }
