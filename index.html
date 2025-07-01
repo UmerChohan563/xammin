@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-    <title>Martial Arts Section</title>
+    <title>Martial Arts Website</title>
+    <link rel="icon" href="./assets/images/Frame 246.svg" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.css">
     <link rel="stylesheet" href="styles.css" />
 </head>
@@ -17,65 +19,65 @@
 
             <!-- Slide 1: Hero Section -->
             <div class="swiper-slide">
-                <section class="hero-section">
+                <section class="hero-section" id="home_section">
                     <div class="background-slider">
-                        <div class="bg-slide" style="background-image: url('./assets/20250619_011059.png')"></div>
-                        <div class="bg-slide" style="background-image: url('./assets/hero_image_3.png')"></div>
-                        <div class="bg-slide" style="background-image: url('./assets/hero_image_4.png')"></div>
-                        <div class="bg-slide" style="background-image: url('./assets/hero_image_5.png')"></div>
+                        <div class="bg-slide" style="background-image: url('./assets/images/20250619_011059.png')">
+                        </div>
+                        <div class="bg-slide" style="background-image: url('./assets/images/hero_image_3.png')"></div>
+                        <div class="bg-slide" style="background-image: url('./assets/images/hero_image_4.png')"></div>
+                        <div class="bg-slide" style="background-image: url('./assets/images/hero_image_5.png')"></div>
                     </div>
                     <div class="section-background animated position_absolute width_100 height_100vh">
                         <div class="content-wrapper">
                             <header>
-                                <img src="./assets/Frame 246.png" alt="Logo" class="logo_1" />
+                                <img src="./assets/images/Frame 246.svg" alt="Logo" class="logo_1" />
                                 <button class="mobile-menu-toggle">☰</button>
                                 <nav class="desktop-nav">
-                                    <a href="#">About</a>
-                                    <a href="#">Programs</a>
-                                    <a href="#">Enrollment</a>
-                                    <a href="#">Contact</a>
+                                    <button class="nav-link video">About</button>
+                                    <button class="nav-link programs">Programs</button>
+                                    <button class="nav-link enrollment">Enrollment</button>
+                                    <button class="nav-link contact">Contact</button>
                                 </nav>
                                 <div class="mobile-nav">
                                     <button class="close-menu">×</button>
-                                    <a href="#">About</a>
-                                    <a href="#">Programs</a>
-                                    <a href="#">Enrollment</a>
-                                    <a href="#">Contact</a>
+                                    <a href="#video_section" class="nav-link video">About</a>
+                                    <a href="#program_sections" class="nav-link programs">Programs</a>
+                                    <a href="#enrollment_section" class="nav-link enrollment">Enrollment</a>
+                                    <a href="#contact_section" class="nav-link contact">Contact</a>
                                 </div>
                             </header>
 
                             <div class="hero-container">
                                 <div class="hero-content">
                                     <div class="p-35px p_0">
-                                        <h1>MARTIAL ARTS FOR <br><span class="highlight">MIND, BODY & SPIRIT</span></h1>
+                                        <h1 class="font_weight_100">MARTIAL ARTS FOR <br><span class="highlight">MIND, BODY & SPIRIT</span></h1>
                                         <p>A Journey Through the Art of Movement and Mind</p>
                                     </div>
                                 </div>
                                 <button class="explore-btn">Explore Programs<div class="mt-5"><img
-                                            src="./assets/Unions.png" alt="">
+                                            src="./assets/images/Union.svg" alt="">
                                     </div></button>
                             </div>
                         </div>
-                        <div class="scroll-arrow text-center" id="scrollArrow"><img src="./assets/Union.png"
+                        <div class="scroll-arrow text-center" id="scrollArrow"><img src="./assets/images/Union (3).svg"
                                 width="100%"></div>
                     </div>
                 </section>
             </div>
 
             <div class="swiper-slide">
-                <section class="video-section">
+                <section class="video-section" id="video_section">
                     <!-- Text Content -->
-                    <div class="d_flex height_100vh h_auto">
-                        <div class="video-content section-background animated">
-                            <div class="mt_mb_5rem">
+                    <div class="d_flex height_100vh h_auto watchnow_watermark">
+                        <div class="video-content animated">
+                            <div class="mt_mb_1rem">
                                 <h1 class="video-title">WATCH OUR <span class="highlight">PRACTICE</span></h1>
                                 <!-- <hr class="hr_highlighted"> -->
                                 <div class="underline"></div>
                             </div>
                             <div class="video-background">
                                 <video muted playsinline>
-                                    <source src="./assets/hehe.mp4" type="video/mp4">
-                                    <!-- Fallback text if video doesn't load -->
+                                    <source src="./assets/video/video.mp4" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
                                 <div class="video-overlay"></div>
@@ -84,6 +86,44 @@
                                         <path d="M8 5v14l11-7z" />
                                     </svg>
                                 </button>
+                                <div class="video-controls" id="videoControls">
+                                    <div class="progress-container">
+                                        <input type="range" id="videoProgress" min="0" max="100" step="0.1" value="0">
+                                    </div>
+                                    <div class="controls-row">
+                                        <button class="control-btn" id="skipBackward">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M11 16.07V7.93c0-.81-.91-1.28-1.58-.82l-4.77 3.53c-.62.46-.62 1.38 0 1.84l4.77 3.53c.67.47 1.58 0 1.58-.81zm1.66-3.25l4.77 3.53c.66.47 1.58-.01 1.58-.82V7.93c0-.81-.91-1.28-1.58-.82l-4.77 3.53c-.62.46-.62 1.38 0 1.84z" />
+                                            </svg>
+                                            <span>5s</span>
+                                        </button>
+                                        <button class="control-btn" id="playPauseBtn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </button>
+                                        <button class="control-btn" id="skipForward">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M5.58 16.89l5.77-4.07c.56-.4.56-1.24 0-1.63L5.58 7.11C4.91 6.65 4 7.12 4 7.93v8.14c0 .81.91 1.28 1.58.82zM13 7.93v8.14c0 .81.91 1.28 1.58.82l5.77-4.07c.56-.4.56-1.24 0-1.63l-5.77-4.07c-.67-.47-1.58 0-1.58.81z" />
+                                            </svg>
+                                            <span>5s</span>
+                                        </button>
+                                        <div class="volume-control">
+                                            <button class="control-btn" id="volumeBtn">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                                                </svg>
+                                            </button>
+                                            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0">
+                                        </div>
+                                        <div class="time-display">
+                                            <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,7 +145,7 @@
                                     has been the industry's standard dummy text ever since the 1500s, when an unknown
                                     printer took a galley of type and scrambled it to make a type specimen book.
                                 </p>
-                                <button class="philosophy-button">GET STARTED <img src="./assets/Unions.png"
+                                <button class="philosophy-button">GET STARTED <img src="./assets/images/Union.svg"
                                         alt=""></button>
                             </div>
                         </div>
@@ -114,34 +154,36 @@
             </div>
 
             <div class="swiper-slide">
-                <section class="programs-section d_grid section-background ">
-                    <div class="animated">
-                        <div class="d_flex items_center justify_space_between mb_80px mb_25_mobile pR_L_25px">
-                            <h2 class="programs-title">OUR <span class="highlight">PROGRAMS</span></h2>
-                            <button class="programs-button">GET STARTED <img src="./assets/Unionred.png"
-                                    alt=""></button>
-                        </div>
-                        <div class="d_flex justify_space_between flex_wrap_android">
-                            <div class="container_programs">
-                                <div class="philosophy-image-1">
-                                    <!-- <div class="background-effect"></div> -->
-                                </div>
-                                <div class="philosophy-content">
-                                    <p class="content-title">WING CHUNG KUNG FU</p>
-                                    <p class="programs-text">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    </p>
-                                </div>
+                <section class="programs-section d_grid section-background" id="program_sections">
+                    <div>
+                        <div class="animated">
+                            <div class="d_flex items_center justify_space_between m1b_40 mb_25_mobile pR_L_25px">
+                                <h2 class="programs-title">OUR <span class="highlight">PROGRAMS</span></h2>
+                                <button class="programs-button">GET STARTED <img src="./assets/images/Union (2).svg"
+                                        class="unioin_image" alt=""></button>
                             </div>
-                            <div class="container_programs">
-                                <div class="philosophy-image-2">
-                                    <!-- <div class="background-effect"></div> -->
+                            <div class="d_flex justify_space_between flex_wrap_android height_70vh items_center">
+                                <div class="container_programs">
+                                    <div class="philosophy-image-1">
+                                        <!-- <div class="background-effect"></div> -->
+                                    </div>
+                                    <div class="philosophy-content">
+                                        <p class="content-title">WING CHUNG KUNG FU</p>
+                                        <p class="programs-text">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="philosophy-content">
-                                    <p class="content-title">WING CHUNG KUNG FU</p>
-                                    <p class="programs-text">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    </p>
+                                <div class="container_programs">
+                                    <div class="philosophy-image-2">
+                                        <!-- <div class="background-effect"></div> -->
+                                    </div>
+                                    <div class="philosophy-content">
+                                        <p class="content-title">TAI CHI KUNG FU</p>
+                                        <p class="programs-text">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -152,9 +194,9 @@
             <div class="swiper-slide">
                 <section class="disclaimer-section">
                     <!-- Text Content -->
-                    <div class="d_flex height_80vh items_center h_auto">
+                    <div class="d_flex height_100vh items_center h_auto disclaimer_watermark">
                         <div class="d_flex disclaimer-content">
-                            <div class="">
+                            <div class="width_100">
                                 <div class="disclaimer_container animated">
                                     <div>
                                         <h2 class="programs-title">Disclaimer / <span class="highlight">Waiver</span>
@@ -168,8 +210,8 @@
                                                 <li>Training involves risk — participation implies informed consent</li>
                                                 <li>The organization has no political or religious affiliations</li>
                                             </ul>
-                                            <button class="philosophy-button">GET STARTED <img src="./assets/Unions.png"
-                                                    alt=""></button>
+                                            <button class="philosophy-button">GET STARTED <img
+                                                    src="./assets/images/Union.svg" alt=""></button>
                                         </div>
                                     </div>
                                 </div>
@@ -180,9 +222,9 @@
             </div>
 
             <div class="swiper-slide">
-                <section class="enroll-section">
+                <section class="enroll-section" id="enrollment_section">
                     <div class="container animated">
-                        <div class="mt_mb_5rem">
+                        <div class="mt_mb_1rem">
                             <h1 class="video-title">ENROLLMENT <span class="highlight">DATES GRID</span></h1>
                             <!-- <hr class="hr_highlighted"> -->
                             <div class="underline"></div>
@@ -197,7 +239,7 @@
                                     <p>Wing Chun Kung Fu</p>
                                 </div>
                                 <button class="enroll-btn" onclick="openPopup(1)">ENROLL <img
-                                        src="./assets/Unionb.png"></button>
+                                        src="./assets/images/Union (1).svg"></button>
                             </div>
 
                             <div class="enroll-item">
@@ -206,7 +248,7 @@
                                     <p>Tai Chi Kung Fu</p>
                                 </div>
                                 <button class="enroll-btn" onclick="openPopup(1)">ENROLL <img
-                                        src="./assets/Unionb.png"></button>
+                                        src="./assets/images/Union (1).svg"></button>
                             </div>
 
                             <div class="enroll-item">
@@ -215,7 +257,7 @@
                                     <p>Wing Chun Kung Fu</p>
                                 </div>
                                 <button class="enroll-btn" onclick="openPopup(1)">ENROLL <img
-                                        src="./assets/Unionb.png"></button>
+                                        src="./assets/images/Union (1).svg"></button>
                             </div>
                         </div>
                     </div>
@@ -266,12 +308,12 @@
                         <div class="logos-section">
                             <div class="logos-overlay"></div>
                             <div class="logos-container">
-                                <div class="logo-placeholder">Brand 1</div>
-                                <div class="logo-placeholder">Brand 2</div>
-                                <div class="logo-placeholder">Brand 3</div>
-                                <div class="logo-placeholder">Brand 4</div>
-                                <div class="logo-placeholder">Brand 5</div>
-                                <div class="logo-placeholder">Brand 6</div>
+                                <div class="logo-placeholder"><img src="./assets/images/image 160.svg" width="100%"></div>
+                                <div class="logo-placeholder"><img src="./assets/images/image 160.svg" width="100%"></div>
+                                <div class="logo-placeholder"><img src="./assets/images/image 160.svg" width="100%"></div>
+                                <div class="logo-placeholder"><img src="./assets/images/image 160.svg" width="100%"></div>
+                                <div class="logo-placeholder"><img src="./assets/images/image 160.svg" width="100%"></div>
+                                <div class="logo-placeholder"><img src="./assets/images/image 160.svg" width="100%"></div>
                             </div>
                         </div>
                     </div>
@@ -279,13 +321,14 @@
             </div>
 
             <div class="swiper-slide">
-                <section class="footer-section">
+                <section class="footer-section footer-container-image" id="contact_section">
                     <div class="overflow_hidden">
-                        <div class="footer-container-image"></div>
+                        <div class=""></div>
                         <div>
                             <div class="footer-container animated">
                                 <div class="footer-left">
-                                    <div class="logo"><img src="./assets/logo.png" width="100"></div>
+                                    <div class="logo"><img src="./assets/images/Wing Chun Foundation Lagos_F6 1.svg"
+                                            width="100"></div>
                                     <p class="footer-description">
                                         A Martial Arts Website is dedicated to cultivating self-awareness, discipline,
                                         and
@@ -293,21 +336,30 @@
                                         arts.
                                     </p>
                                     <div class="social-icons">
-                                        <a href="#"><img src="./assets/basil_facebook-solid.png"></a>
-                                        <a href="#"><img src="./assets/devicon_twitter.png"></a>
-                                        <a href="#"><img src="./assets/mdi_instagram.png"></a>
-                                        <a href="#"><img src="./assets/ri_linkedin-fill.png"></a>
+                                        <a href="#"><img class="social_btn filter_invert facebook"
+                                                src="./assets/images/facebook.svg"></a>
+                                        <a href="#"><img class="social_btn filter_invert twitter"
+                                                src="./assets/images/twitter.svg"></a>
+                                        <a href="#"><img class="social_btn filter_invert insta"
+                                                src="./assets/images/insta.svg"></a>
+                                        <a href="#"><img class="social_btn filter_invert link"
+                                                src="./assets/images/linkedin.svg"></a>
                                     </div>
                                 </div>
 
                                 <div class="footer-column">
                                     <h3 class="footer_contact">Quick Links</h3>
                                     <ul class="footer-links">
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Programs</a></li>
-                                        <li><a href="#">Enrollment</a></li>
-                                        <li><a href="#">Home</a></li>
+                                        <li><button class="footer_links footer_home">Home</button></li>
+                                        <li><button class="footer_links footer_about">About</button></li>
+                                        <li><button class="footer_links footer_programs">Programs</button></li>
+                                        <li><button class="footer_links footer_enrollment">Enrollment</button></li>
+                                    </ul>
+                                    <ul class="footer_links_mobile">
+                                        <li><a href="#home_section" class="footer_links footer_home">Home</a></li>
+                                        <li><a href="#video_section" class="footer_links footer_about">About</a></li>
+                                        <li><a href="#program_sections" class="footer_links footer_programs">Programs</a></li>
+                                        <li><a href="#enrollment_section" class="footer_links footer_enrollment">Enrollment</a></li>
                                     </ul>
                                 </div>
 
@@ -317,20 +369,21 @@
                                         <div class="contact-info">
                                             <div class="contact-email">Info@example.com</div>
                                             <a href="mailto:info@example.com"><button class="email_btn">EMAIL NOW <img
-                                                        src="./assets/Unions.png" alt=""></button></a>
+                                                        src="./assets/images/Union.svg" class="unioin_image_white"
+                                                        alt=""></button></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr class="footer_hr">
                         <div class="footer-bottom">
+                            <hr class="footer_hr">
                             <div class="footer-bottom-content">
                                 <div class="copyright">
-                                    Copyright © 2025 WING CHUN FOUNDATION LAGOS | All rights reserved
+                                    © 2025 A Martial Arts Website. All rights reserved
                                 </div>
                                 <div class="design-credit">
-                                    Design By <a href="#">Xammin</a>
+                                    Design By <a href="https://xammin.com" target="_blank">Xammin</a>
                                 </div>
                             </div>
                         </div>
@@ -342,4 +395,5 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.7/swiper-bundle.min.js"></script>
             <script src="script.js"></script>
 </body>
+
 </html>

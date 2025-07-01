@@ -1,6 +1,6 @@
 // Function to check if device is mobile
 function isMobileDevice() {
-    return window.innerWidth <= 768 || (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    return window.innerWidth <= 1100 || (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 }
 
 
@@ -126,56 +126,284 @@ function initBackgroundSliders() {
 
 // Initialize all background sliders when DOM is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    initBackgroundSliders();
-
+    initBackgroundSliders()
     // Video controls
     const video = document.querySelector('.video-background video');
-    const playBtn = document.getElementById('videoControlBtn');
-    if (video && playBtn) {
-        const playIcon = playBtn.querySelector('svg path');
+const playBtn = document.getElementById('videoControlBtn');
+const videoControls = document.getElementById('videoControls');
+const videoOverlay = document.querySelector('.video-overlay');
 
-        // Initially video is autoplaying (muted)
-        let isPlaying = true;
+if (video && playBtn && videoControls) {
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const videoProgress = document.getElementById('videoProgress');
+    const volumeBtn = document.getElementById('volumeBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const skipBackward = document.getElementById('skipBackward');
+    const skipForward = document.getElementById('skipForward');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const durationDisplay = document.getElementById('duration');
 
-        // Toggle play/pause on button click
-        playBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+    let isPlaying = false;
+    let isMouseDown = false;
+    let controlsTimeout;
 
-            if (isPlaying) {
-                video.play();
-                playIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
-            } else {
-                video.pause();
-                playIcon.setAttribute('d', 'M8 5v14l11-7z');
-            }
-            isPlaying = !isPlaying;
-        });
+    // Initialize video
+    video.muted = true;
+    
+    // Initially hide controls after 3 seconds
+    hideControlsAfterDelay();
 
-        // Change button to pause icon when user clicks directly on video
-        video.addEventListener('click', function () {
-            if (isPlaying) {
-                video.play();
-                playIcon.setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
-            } else {
-                video.pause();
-                playIcon.setAttribute('d', 'M8 5v14l11-7z');
-            }
-            isPlaying = !isPlaying;
-        });
+    // Format time (seconds to MM:SS)
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    }
 
-        // Update button state when video ends
-        video.addEventListener('ended', function () {
+    // Update time display
+    function updateTimeDisplay() {
+        currentTimeDisplay.textContent = formatTime(video.currentTime);
+        durationDisplay.textContent = formatTime(video.duration);
+    }
+
+    // Update progress bar
+    function updateProgress() {
+        if (!isMouseDown) {
+            videoProgress.value = (video.currentTime / video.duration) * 100;
+        }
+        updateTimeDisplay();
+    }
+
+    // Show controls
+    function showControls() {
+        videoControls.style.display = 'flex';
+        playBtn.style.display = 'block';
+    }
+
+    // Hide controls
+    function hideControls() {
+        if (!video.paused) {
+            videoControls.style.display = 'none';
+            playBtn.style.display = 'none';
+        }
+    }
+
+    // Hide controls after 3 seconds delay
+    function hideControlsAfterDelay() {
+        clearTimeout(controlsTimeout);
+        controlsTimeout = setTimeout(() => {
+            hideControls();
+        }, 3000);
+    }
+
+    // Show controls and reset hide timer
+    function showControlsAndResetTimer() {
+        showControls();
+        hideControlsAfterDelay();
+    }
+
+    // Toggle play/pause
+    function togglePlayPause() {
+        if (video.paused) {
+            video.play();
+            playPauseBtn.querySelector('path').setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+            playBtn.querySelector('path').setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+            isPlaying = true;
+            showControlsAndResetTimer();
+        } else {
+            video.pause();
+            playPauseBtn.querySelector('path').setAttribute('d', 'M8 5v14l11-7z');
+            playBtn.querySelector('path').setAttribute('d', 'M8 5v14l11-7z');
             isPlaying = false;
-            playIcon.setAttribute('d', 'M8 5v14l11-7z');
+            showControls(); // Keep controls visible when paused
+            clearTimeout(controlsTimeout);
+        }
+    }
+
+    // Event listeners
+    playBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        togglePlayPause();
+    });
+
+    playPauseBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        togglePlayPause();
+    });
+
+    video.addEventListener('click', function () {
+        togglePlayPause();
+    });
+
+    video.addEventListener('play', function () {
+        playPauseBtn.querySelector('path').setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+        playBtn.querySelector('path').setAttribute('d', 'M6 19h4V5H6v14zm8-14v14h4V5h-4z');
+        isPlaying = true;
+        showControlsAndResetTimer();
+    });
+
+    video.addEventListener('pause', function () {
+        playPauseBtn.querySelector('path').setAttribute('d', 'M8 5v14l11-7z');
+        playBtn.querySelector('path').setAttribute('d', 'M8 5v14l11-7z');
+        isPlaying = false;
+        showControls(); // Keep controls visible when paused
+        clearTimeout(controlsTimeout);
+    });
+
+    video.addEventListener('ended', function () {
+        playPauseBtn.querySelector('path').setAttribute('d', 'M8 5v14l11-7z');
+        playBtn.querySelector('path').setAttribute('d', 'M8 5v14l11-7z');
+        isPlaying = false;
+        showControls(); // Keep controls visible when ended
+        clearTimeout(controlsTimeout);
+    });
+
+    video.addEventListener('timeupdate', updateProgress);
+
+    video.addEventListener('loadedmetadata', function () {
+        videoProgress.value = 0;
+        updateTimeDisplay();
+    });
+
+    videoProgress.addEventListener('input', function () {
+        const seekTime = (videoProgress.value / 100) * video.duration;
+        video.currentTime = seekTime;
+    });
+
+    videoProgress.addEventListener('mousedown', function () {
+        isMouseDown = true;
+    });
+
+    videoProgress.addEventListener('mouseup', function () {
+        isMouseDown = false;
+    });
+
+    skipBackward.addEventListener('click', function () {
+        video.currentTime = Math.max(0, video.currentTime - 5);
+        showControlsAndResetTimer();
+    });
+
+    skipForward.addEventListener('click', function () {
+        video.currentTime = Math.min(video.duration, video.currentTime + 5);
+        showControlsAndResetTimer();
+    });
+
+    volumeBtn.addEventListener('click', function () {
+        video.muted = !video.muted;
+        if (video.muted) {
+            volumeBtn.querySelector('path').setAttribute('d', 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z');
+        } else {
+            volumeBtn.querySelector('path').setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
+            volumeSlider.value = video.volume;
+        }
+        showControlsAndResetTimer();
+    });
+
+    volumeSlider.addEventListener('input', function () {
+        video.volume = volumeSlider.value;
+        video.muted = false;
+        if (video.volume > 0) {
+            volumeBtn.querySelector('path').setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
+        }
+        showControlsAndResetTimer();
+    });
+
+    // Show controls when mouse moves in video area and reset timer
+    video.addEventListener('mousemove', function () {
+        showControlsAndResetTimer();
+    });
+
+    // Show controls when mouse enters video area
+    video.addEventListener('mouseenter', function () {
+        showControlsAndResetTimer();
+    });
+
+    // Show controls when mouse moves over video-overlay
+    if (videoOverlay) {
+        videoOverlay.addEventListener('mousemove', function () {
+            showControlsAndResetTimer();
+        });
+
+        videoOverlay.addEventListener('mouseenter', function () {
+            showControlsAndResetTimer();
         });
     }
 
-    // Smooth scroll behavior for explore button
+    // Optional: Also show controls when mouse leaves and enters the controls area
+    videoControls.addEventListener('mouseenter', function () {
+        showControls();
+        clearTimeout(controlsTimeout);
+    });
+
+    videoControls.addEventListener('mouseleave', function () {
+        if (!video.paused) {
+            hideControlsAfterDelay();
+        }
+    });
+}
+    
     const exploreBtn = document.querySelector('.explore-btn');
-    if (exploreBtn) {
+    if (exploreBtn && typeof swiper !== 'undefined') {
         exploreBtn.addEventListener('click', () => {
             swiper.slideNext();
+        });
+    }
+
+    const videoButton = document.querySelector('.video');
+    if (videoButton && typeof swiper !== 'undefined') {
+        videoButton.addEventListener('click', () => {
+            swiper.slideNext();
+        });
+    }
+
+    const programsButton = document.querySelector('.programs');
+    if (programsButton && typeof swiper !== 'undefined') {
+        programsButton.addEventListener('click', () => {
+            swiper.slideTo(3); // Slides to 3rd slide (index starts at 0)
+        });
+    }
+
+    const enrollmentButton = document.querySelector('.enrollment');
+    if (enrollmentButton && typeof swiper !== 'undefined') {
+        enrollmentButton.addEventListener('click', () => {
+            swiper.slideTo(5); // Slides to 3rd slide (index starts at 0)
+        });
+    }
+
+    const contactButton = document.querySelector('.contact');
+    if (contactButton && typeof swiper !== 'undefined') {
+        contactButton.addEventListener('click', () => {
+            swiper.slideTo(7); // Slides to 3rd slide (index starts at 0)
+        });
+    }
+
+    const homeButton = document.querySelector('.footer_home');
+    if (homeButton && typeof swiper !== 'undefined') {
+        homeButton.addEventListener('click', () => {
+            swiper.slideTo(0); // Goes to the first slide (index 0)
+        });
+    }
+
+    const footerAboutButton = document.querySelector('.footer_about');
+    if (footerAboutButton && typeof swiper !== 'undefined') {
+        footerAboutButton.addEventListener('click', () => {
+            swiper.slideTo(1); // Goes to the first slide (index 0)
+        });
+    }
+
+    const footerProgramsButton = document.querySelector('.footer_programs');
+    if (footerProgramsButton && typeof swiper !== 'undefined') {
+        footerProgramsButton.addEventListener('click', () => {
+            swiper.slideTo(3); // Goes to the first slide (index 0)
+        });
+    }
+
+    const footerEnrollmentButton = document.querySelector('.footer_enrollment');
+    if (footerEnrollmentButton && typeof swiper !== 'undefined') {
+        footerEnrollmentButton.addEventListener('click', () => {
+            swiper.slideTo(5); // Goes to the first slide (index 0)
         });
     }
 });
@@ -275,31 +503,93 @@ function openPopup(index) {
     }
 }
 
-function closePopup() {
-    document.getElementById('popupOverlay').style.display = 'none';
-}
+// Mobile menu toggle functionality
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const mobileNav = document.querySelector('.mobile-nav');
+const closeMenu = document.querySelector('.close-menu');
 
-document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileNav = document.querySelector('.mobile-nav');
-    const closeMenu = document.querySelector('.close-menu');
+if (mobileMenuToggle && mobileNav && closeMenu) {
+    let isMenuOpen = false;
 
-    mobileMenuToggle.addEventListener('click', function () {
-        mobileNav.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+    // Function to open menu
+    function openMenu() {
+        isMenuOpen = true;
+        mobileNav.classList.add('active'); // Add active class to show mobile nav
+        mobileMenuToggle.innerHTML = '×'; // Change bar icon to X icon
+        mobileMenuToggle.classList.add('menu-open'); // Optional: add class for styling
+        // Hide the close button since we're using the toggle button now
+        closeMenu.style.display = 'none';
+    }
+
+    // Function to close menu
+    function closeMenuFunc() {
+        isMenuOpen = false;
+        mobileNav.classList.remove('active'); // Remove active class to hide mobile nav
+        mobileMenuToggle.innerHTML = '☰'; // Change X icon back to bar icon
+        mobileMenuToggle.classList.remove('menu-open'); // Optional: remove class
+        // Show the close button back (if you want to keep both options)
+        closeMenu.style.display = 'block';
+    }
+
+    // Toggle menu when clicking the main toggle button
+    mobileMenuToggle.addEventListener('click', function() {
+        if (isMenuOpen) {
+            closeMenuFunc();
+        } else {
+            openMenu();
+        }
     });
 
-    closeMenu.addEventListener('click', function () {
-        mobileNav.classList.remove('active');
-        document.body.style.overflow = ''; // Re-enable scrolling
+    // Close menu when clicking the close button (×)
+    closeMenu.addEventListener('click', function() {
+        closeMenuFunc();
     });
 
-    // Close menu when clicking on a link
-    const mobileLinks = document.querySelectorAll('.mobile-nav a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            mobileNav.classList.remove('active');
-            document.body.style.overflow = '';
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInsideMenu = mobileNav.contains(event.target);
+        const isClickOnToggle = mobileMenuToggle.contains(event.target);
+        
+        if (!isClickInsideMenu && !isClickOnToggle && isMenuOpen) {
+            closeMenuFunc();
+        }
+    });
+
+    // Close menu when clicking on nav links
+    const navLinks = mobileNav.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            closeMenuFunc();
         });
     });
-});
+}
+
+// Optional: Add CSS for smooth transitions
+const style = document.createElement('style');
+style.textContent = `
+    .mobile-menu-toggle {
+        transition: transform 0.3s ease;
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .mobile-menu-toggle.menu-open {
+        transform: rotate(180deg);
+    }
+    
+    .mobile-nav {
+        transition: all 0.3s ease;
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .mobile-nav.active {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+`;
+document.head.appendChild(style);
