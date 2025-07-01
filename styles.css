@@ -1804,6 +1804,14 @@ nav a.active {
         margin: 0 0 75px 0;
     }
 
+    .font_size_13px_mobile{
+        font-size: 13px;
+    }
+
+    .font_size_12px_mobile{
+        font-size: 12px;
+    }
+
     .footer-bottom {
         padding: 0;
     }
