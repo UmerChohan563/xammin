@@ -17,7 +17,7 @@ const handleClick = () => {
 const buttons = [
     '.get_started',
     '.get_started_programs',
-    '.get_started_disclaimer'
+    '.get_started_disclaimer',
 ];
 
 buttons.forEach(selector => {
@@ -368,12 +368,18 @@ if (video && playBtn && videoControls) {
     });
 }
     
-    const exploreBtn = document.querySelector('.explore-btn');
-    if (exploreBtn && typeof swiper !== 'undefined') {
-        exploreBtn.addEventListener('click', () => {
+const exploreBtn = document.querySelector('.explore-btn');
+if (exploreBtn) {
+    exploreBtn.addEventListener('click', () => {
+        if (isMobileDevice()) {
+            // For mobile devices - scroll to video section
+            document.getElementById('video_section')?.scrollIntoView({ behavior: 'smooth' });
+        } else if (typeof swiper !== 'undefined') {
+            // For desktop - slide to next slide
             swiper.slideNext();
-        });
-    }
+        }
+    });
+}
 
     const videoButton = document.querySelector('.video');
     if (videoButton && typeof swiper !== 'undefined') {
