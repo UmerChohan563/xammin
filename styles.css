@@ -304,7 +304,6 @@ nav a.active {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 1.5rem;
     margin-left: 35px;
     padding: 0.8rem 1.5rem;
     background-color: red;
@@ -698,7 +697,7 @@ nav a.active {
     }
 
     .video-title {
-        font-size: 2rem;
+        font-size: 20px;
         font-weight: 100;
     }
 
@@ -834,6 +833,7 @@ nav a.active {
     font-family: 'Anton';
     font-size: 25px;
     margin: 35px 0;
+    font-weight: 100;
 }
 
 .container_programs {
@@ -913,7 +913,7 @@ nav a.active {
     font-size: 20px;
     font-weight: 100;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     color: white;
 }
 
@@ -1160,14 +1160,10 @@ nav a.active {
     border-left: 2px solid #F2A0A0;
 }
 
-.contact-info {
-    margin-bottom: 25px;
-}
-
 .contact-email {
     color: #000000;
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .footer-bottom {
@@ -1248,6 +1244,7 @@ nav a.active {
     color: #000;
     font-size: 35px;
     font-weight: 100;
+    margin-bottom: 10px !important;
 }
 
 .footer_hr {
@@ -1737,6 +1734,10 @@ nav a.active {
         line-height: 2;
     }
 
+    .programs-text{
+        width: 100%;
+    }
+
     .footer_links_mobile{
         display: block !important;
     }
@@ -1803,7 +1804,6 @@ nav a.active {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 1.5rem;
     padding: 0.8rem 1.5rem;
     background-color: red;
     color: white;
@@ -1830,7 +1830,7 @@ nav a.active {
     display: none;
 }
 .spot_container{
-    height: 70vh;
+    height: 50vh;
     display: flex;
     width: 100%;
     align-items: center;

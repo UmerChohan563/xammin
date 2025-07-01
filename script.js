@@ -3,6 +3,30 @@ function isMobileDevice() {
     return window.innerWidth <= 1100 || (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 }
 
+const handleClick = () => {
+    if (isMobileDevice()) {
+        // For mobile devices - scroll to enrollment section
+        document.getElementById('enrollment_section')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (typeof swiper !== 'undefined') {
+        // For desktop - slide to slide 5
+        swiper.slideTo(5);
+    }
+};
+
+// Apply to all buttons
+const buttons = [
+    '.get_started',
+    '.get_started_programs',
+    '.get_started_disclaimer'
+];
+
+buttons.forEach(selector => {
+    const button = document.querySelector(selector);
+    if (button) {
+        button.addEventListener('click', handleClick);
+    }
+});
+
 
 // Initialize Swiper only for non-mobile devices
 let swiper;
@@ -407,24 +431,24 @@ if (video && playBtn && videoControls) {
         });
     }
 
-    const getStarted = document.querySelector('.get_started','.get_started_programs');
-    if (getStarted && typeof swiper !== 'undefined') {
-        getStarted.addEventListener('click', () => {
-            swiper.slideTo(5); 
-        });
-    }
-    const getStartedPrograme = document.querySelector('.get_started_programs');
-    if (getStartedPrograme && typeof swiper !== 'undefined') {
-        getStartedPrograme.addEventListener('click', () => {
-            swiper.slideTo(5); 
-        });
-    }
-    const getStartedDisclaimer = document.querySelector('.get_started_disclaimer');
-    if (getStartedDisclaimer && typeof swiper !== 'undefined') {
-        getStartedDisclaimer.addEventListener('click', () => {
-            swiper.slideTo(5); 
-        });
-    }
+    // const getStarted = document.querySelector('.get_started','.get_started_programs');
+    // if (getStarted && typeof swiper !== 'undefined') {
+    //     getStarted.addEventListener('click', () => {
+    //         swiper.slideTo(5); 
+    //     });
+    // }
+    // const getStartedPrograme = document.querySelector('.get_started_programs');
+    // if (getStartedPrograme && typeof swiper !== 'undefined') {
+    //     getStartedPrograme.addEventListener('click', () => {
+    //         swiper.slideTo(5); 
+    //     });
+    // }
+    // const getStartedDisclaimer = document.querySelector('.get_started_disclaimer');
+    // if (getStartedDisclaimer && typeof swiper !== 'undefined') {
+    //     getStartedDisclaimer.addEventListener('click', () => {
+    //         swiper.slideTo(5); 
+    //     });
+    // }
 });
 
 function openPopup(index) {
